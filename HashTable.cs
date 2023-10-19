@@ -48,6 +48,7 @@ public class HashTable<TKey, TValue> : IHashTable <TKey, TValue>
         int index = GetIndex(key); //Get the index of the key
         var entry = table[index];//put the table element with the said index into entry variable
         TValue value;// declared a variable value as type TValue
+        TKey k = entry.Key;
 
         while (entry != null) // While the table is not empty
         {
@@ -86,8 +87,10 @@ public class HashTable<TKey, TValue> : IHashTable <TKey, TValue>
                 return true;// Return true
             }
 
-            prevEntry = entry;// Put current node in Previous node variable
-            entry = entry.Next; // Make cureent node's next to be current node
+            prevEntry = entry;// Put current node in prevEntry variable
+            TKey p = prevEntry.Key;
+            entry = entry.Next; // Move to next node
+            TKey e = entry.Key;
         }
 
         return false;// Return false
@@ -99,7 +102,6 @@ public class HashTable<TKey, TValue> : IHashTable <TKey, TValue>
     {
         int index = GetIndex(key);//Get index using hash function in the GetIndex method
         var entry = table[index];//Assign the entry table elements with the index to variable node entry
-
         while (entry != null) //While current node is not empty
         {
             if (entry.Key.Equals(key))// If the current node's key is equal to the passed key 
@@ -118,9 +120,9 @@ public class HashTable<TKey, TValue> : IHashTable <TKey, TValue>
             Value = value,
             Next = table[index]
         };
-
         table[index] = newEntry; //Make new entry the table index entry
         size++; // increment number of entries by 1
+         
 
         if (size >= table.Length * LoadFactor) //If number of number of entries >= Hash table lenght * load factor
             ResizeTable();// Call ResizeTable method
