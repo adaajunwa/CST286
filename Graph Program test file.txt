@@ -1,0 +1,64 @@
+Graph graph = new Graph(5);
+graph.addNode(new GraphNode("A"));
+graph.addNode(new GraphNode("B"));
+graph.addNode(new GraphNode("C"));
+graph.addNode(new GraphNode("D"));
+graph.addNode(new GraphNode("E"));
+
+//graph.addEdge(0, 1);// For Breadth-first and Depth-first 
+//graph.addEdge(1, 2);
+//graph.addEdge(1, 4);
+//graph.addEdge(2, 3);
+//graph.addEdge(2, 4);
+//graph.addEdge(4, 0);
+//graph.addEdge(4, 2);
+
+
+
+graph.addEdgeWeight(0, 1, 3); //For shortest path
+graph.addEdgeWeight(1, 2, 2);
+graph.addEdgeWeight(0, 4, 9);
+graph.addEdgeWeight(1, 4, 5);
+graph.addEdgeWeight(2, 3, 3);
+graph.addEdgeWeight(2, 4, 4);
+
+
+
+//graph.addEdgeWeight(0, 1, 3); //For shortest path
+//graph.addEdgeWeight(0, 4, 7);
+//graph.addEdgeWeight(0, 2, 1);
+//graph.addEdgeWeight(1, 2, 2);
+//graph.addEdgeWeight(1, 4, 5);
+//graph.addEdgeWeight(2, 3, 3);
+//graph.addEdgeWeight(2, 4, 4);
+//graph.addEdgeWeight(3, 1, 1);
+//graph.addEdgeWeight(0, 2, 3);
+//graph.addEdgeWeight(2, 2, 1);
+
+graph.displayMatrix();
+Console.WriteLine();
+//graph.depthFirstSearch(0);
+//Console.WriteLine();
+//graph.breadthFirstSearch(0);
+Console.WriteLine();
+graph.displayShortestPath(0);
+Console.WriteLine();
+Console.WriteLine();
+//graph.minSpanTree(0);
+//graph.displayMinSpan();
+
+//graph.addEdge(0, 1);// for cycle
+//graph.addEdge(1, 2);
+//graph.addEdge(2, 3);
+//graph.addEdge(3, 0);
+
+
+//graph.checkEdge(0,1);
+
+
+//graph.findNeighbours(0);
+
+
+
+//graph.depthFirstSearch(0);
+//graph.breadthFirstSearch(0);
