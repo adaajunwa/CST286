@@ -43,7 +43,7 @@ public class Graph: IGraph
     //Implements the addEdgeWeight method in the IGraph interface; Adds an edge weight to the matrix
     public void addEdgeWeight(int src, int dest, int weight)
     {
-        if (matrix[src, dest] == 0 && src != dest)//if edge does not exist
+        if (matrix[src, dest] == 0 && src != dest)//if edge does not exist and there's no loop
         {
 
             matrix[src, dest] = weight; //Insert weight into the corresponding matrix' row and column
@@ -204,7 +204,7 @@ public class Graph: IGraph
         }
         unvisitedNeighbours.Clear(); //Clear "unvisitedNeighbours" list
         visited.Clear();
-        unvisitedNeighbours.Clear();
+        //unvisitedNeighbours.Clear();
         neighbours.Clear();
         int i = 1;// initialize while counter
         while (i <= matrix.GetLength(0) && unvisited.Count != 0)// while counter <= matrix row lenght, and unvisited list is not empty
@@ -238,8 +238,7 @@ public class Graph: IGraph
                                                                                     //(current vertex and unvisited adjecent vertex node)
                    if (Math.Abs(distValue[unvisitedNeighbours[j]]) > cost)//if cost of unvisited adjecent vertex > cost
                     {
-                        int z = unvisitedNeighbours[j];
-                        distValue[unvisitedNeighbours[j]] = cost;//new cost of unvisited adjecent vertex
+                       distValue[unvisitedNeighbours[j]] = cost;//new cost of unvisited adjecent vertex
                     }
                    
                 }
@@ -322,14 +321,14 @@ public class Graph: IGraph
 
                 for (int j = 0; j < unvisitedNeighbours.Count; j++)
                 {
-                    if (matrix[src, unvisitedNeighbours[j]] != 0 && pickedEdge[src, unvisitedNeighbours[j]] == 0 && !tupleList.Contains(new Tuple<int,int,int>(src, unvisitedNeighbours[j], matrix[src, unvisitedNeighbours[j]])))//if edge exists from vertex and edge has not been picked and tuple does not contain edge
+                    if (matrix[src, unvisitedNeighbours[j]] != 0 && pickedEdge[src, unvisitedNeighbours[j]] == 0 && !tupleList.Contains(new Tuple<int,int,int>(src, unvisitedNeighbours[j], matrix[src, unvisitedNeighbours[j]])))//if edge exists im matrix, and edge has not been picked and tuple does not contain edge
                     {
                         int weight = matrix[src, unvisitedNeighbours[j]];//
                         tupleList.Add(new Tuple<int, int, int>(src, unvisitedNeighbours[j], weight));//add to tuple list source vertex, destination vertex, and edge weight
                     }
                 }
             //src = nextNeigbour;// assign nextNeigbour to src
-            if (tupleList.Count != 0 && nextNeigbour > 0)//if tuple list is not empty and source vertex had unvisited adjecent vertices
+            if (tupleList.Count != 0 && nextNeigbour > 0)//if tuple list is not empty and source vertex had unvisited adjacent vertices
             {
                 int smallestEdge = tupleList[0].Item3;//assign first edge weight in tuple list to smallest edge
                 i = 0;// initialize while counter
@@ -345,13 +344,13 @@ public class Graph: IGraph
                     i++;//increment counter by 1
                 }
                 
-                    pickedEdge[tupleList[element].Item1, tupleList[element].Item2] = tupleList[element].Item3;
+                    pickedEdge[tupleList[element].Item1, tupleList[element].Item2] = tupleList[element].Item3;//
                     src = tupleList[element].Item2;
                     
-                 if (visited.Contains(tupleList[element].Item1) && visited.Contains(tupleList[element].Item2))
+                 if (visited.Contains(tupleList[element].Item1) && visited.Contains(tupleList[element].Item2))// If both vertices have been visited (A cycle exists)
                  {
-                    pickedEdge[tupleList[element].Item1, tupleList[element].Item2] = 0;
-                    nextNeigbour = -1;
+                    pickedEdge[tupleList[element].Item1, tupleList[element].Item2] = 0;//Update edge in pickedEdge matrix to 0
+                    nextNeigbour = -1;// Assigng -1 to nextNeigbour so we can backtrack
                  } 
                 tupleList.RemoveAt(element);
             }
