@@ -1,9 +1,38 @@
-Graph graph = new Graph(5);
-graph.addNode(new GraphNode("A"));
-graph.addNode(new GraphNode("B"));
+//AdjListGraph ajList = new AdjListGraph(5);
+//ajList.Add(new GraphNode("A"));
+//ajList.Add(new GraphNode("B"));
+//ajList.Add(new GraphNode("C"));
+//ajList.Add(new GraphNode("D"));
+//ajList.Add(new GraphNode("E"));
+
+//ajList.AddEdge(0, 1);// For Breadth-first and Depth-first 
+//ajList.AddEdge(1, 2);
+//ajList.AddEdge(1, 4);
+//ajList.AddEdge(2, 3);
+//ajList.AddEdge(2, 4);
+//ajList.AddEdge(4, 0);
+//ajList.AddEdge(4, 2);
+
+//ajList.Display();
+
+//Graph graph = new Graph(5);
+//graph.addNode(new GraphNode("A"));
+//graph.addNode(new GraphNode("B"));
+//graph.addNode(new GraphNode("C"));
+//graph.addNode(new GraphNode("D"));
+//graph.addNode(new GraphNode("E"));
+
+Graph graph = new Graph(10);
+graph.addNode(new GraphNode("I"));
+graph.addNode(new GraphNode("E"));
+graph.addNode(new GraphNode("F"));
+graph.addNode(new GraphNode("H"));
+graph.addNode(new GraphNode("G"));
 graph.addNode(new GraphNode("C"));
 graph.addNode(new GraphNode("D"));
-graph.addNode(new GraphNode("E"));
+graph.addNode(new GraphNode("J"));
+graph.addNode(new GraphNode("B"));
+graph.addNode(new GraphNode("A"));
 
 //graph.addEdge(0, 1);// For Breadth-first and Depth-first 
 //graph.addEdge(1, 2);
@@ -15,12 +44,13 @@ graph.addNode(new GraphNode("E"));
 
 
 
-graph.addEdgeWeight(0, 1, 3); //For shortest path
-graph.addEdgeWeight(1, 2, 2);
-graph.addEdgeWeight(0, 4, 9);
-graph.addEdgeWeight(1, 4, 5);
-graph.addEdgeWeight(2, 3, 3);
-graph.addEdgeWeight(2, 4, 4);
+//graph.addEdgeWeight(0, 1, 3); //For shortest path
+//graph.addEdgeWeight(1, 2, 2);
+//graph.addEdgeWeight(0, 4, 9);
+//graph.addEdgeWeight(1, 4, 5);
+//graph.addEdgeWeight(2, 3, 3);
+//graph.addEdgeWeight(2, 4, 4);
+
 
 
 
@@ -35,6 +65,24 @@ graph.addEdgeWeight(2, 4, 4);
 //graph.addEdgeWeight(0, 2, 3);
 //graph.addEdgeWeight(2, 2, 1);
 
+graph.addEdgeWeight(0, 1, 1); //For shortest path
+graph.addEdgeWeight(0, 2, 2);
+graph.addEdgeWeight(0, 3, 6);
+graph.addEdgeWeight(1, 2, 2);
+graph.addEdgeWeight(1, 4, 14);
+graph.addEdgeWeight(2, 4, 8);
+graph.addEdgeWeight(2, 3, 4);
+graph.addEdgeWeight(3, 5, 3);
+graph.addEdgeWeight(3, 6, 1); 
+graph.addEdgeWeight(4, 7, 6);
+graph.addEdgeWeight(4, 9, 1);
+graph.addEdgeWeight(6, 8, 6);
+graph.addEdgeWeight(6, 7, 3);
+graph.addEdgeWeight(7, 9, 4);
+graph.addEdgeWeight(9, 8, 3);
+
+
+Console.WriteLine();
 graph.displayMatrix();
 Console.WriteLine();
 //graph.depthFirstSearch(0);

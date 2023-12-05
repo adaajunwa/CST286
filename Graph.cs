@@ -183,6 +183,7 @@ public class Graph: IGraph
         }
     }
 
+    
     //Implements the displayShortestPath method in the IGraph interface; Displays the shortest path from a given single source.
     public void displayShortestPath(int src)
     {
@@ -190,7 +191,7 @@ public class Graph: IGraph
         int cost;// Holds vertex cost
 
         distValue.Add(0);//Add 0 to "distValue" list as the first vertex' cost
-       
+
         for (int x = 1; x < matrix.GetLength(0); x++)//from the second vertex to the lenght of the matrix row
         {
             distValue.Add(int.MaxValue);//make each vertex' cost in "distValue" list the maximum int value
@@ -214,39 +215,53 @@ public class Graph: IGraph
                 smallest = findMinNeighbours(src);//call findMinNeighbours method with current vertex
                 if (smallest <= -1 && visited.Count != 0)//if there are no unvisted adjecent vertices, and "visited" list is not empty
                 {
-                     visited.Add(unvisited.First());//mark first vertex in "unvisited" list as visited
-                     smallest = findMinNeighbours(visited.Last());//"Backtrack" call findMinNeighbours method with last vertex in "visited" list
+                    visited.Add(unvisited.First());//mark first vertex in "unvisited" list as visited
+                    smallest = findMinNeighbours(visited.Last());//"Backtrack" call findMinNeighbours method with last vertex in "visited" list
                     src = visited.Last();// assign last vertex in "visited" list to src
-                   
+
                     visited.Add(smallest);//mark next unvisited adjecent vertex as visited
                     unvisited.RemoveAt(0);////remove first vertex in "unvisited" list
                     unvisited.Remove(smallest);//remove next unvisited adjecent vertex from "unvisited" list
                 }
                 else //if there are unvisted adjecent vertices
                 {
-                    visited.Add(src);//mark unvisited adjecent vertex as visited
-                    unvisited.Remove(src);//remove unvisited adjecent vertex from "unvisited" list
+                    visited.Add(src);// vertex as visited
+                    unvisited.Remove(src);// vertex from "unvisited" list
                 }
-              
+
                 for (int j = 0; j < unvisitedNeighbours.Count; j++)//for counter < number of unvisited adjecent vertices of current vertex node
-                { 
+                {
                     if (unvisitedNeighbours.Count == 0)//If there are no unvisited adjecent vertices of current vertex
                     { cost = distValue[src] + matrix[src, unvisited[0]]; }//cost = cost of current vertex + edge weight of
                                                                           //(current vertex and first "unvisited" list element)
                     else//If there are unvisited adjecent vertices of current vertex
                     { cost = distValue[src] + matrix[src, unvisitedNeighbours[j]]; }//cost = cost of current vertex + edge weight of
                                                                                     //(current vertex and unvisited adjecent vertex node)
-                   if (Math.Abs(distValue[unvisitedNeighbours[j]]) > cost)//if cost of unvisited adjecent vertex > cost
+                    if (Math.Abs(distValue[unvisitedNeighbours[j]]) > cost)//if cost of unvisited adjecent vertex > cost
                     {
-                       distValue[unvisitedNeighbours[j]] = cost;//new cost of unvisited adjecent vertex
+                        distValue[unvisitedNeighbours[j]] = cost;//new cost of unvisited adjecent vertex
                     }
-                   
+
                 }
                 unvisitedNeighbours.Clear(); //Clear "unvisitedNeighbours" list
-                src = smallest;//Assign smallest adjecent vertex to src 
+               List<int> compareDistValue = new List<int>();//List to compare and get the smallest value in distValue list
+                foreach (int item in distValue)// For each element in distValue list
+                {
+                    if (!visited.Contains(distValue.IndexOf(item)))//if elements index has not been visited
+                    {
+                        compareDistValue.Add(item);//Add the element into compareDistValue list as is
+                    }
+                    else // if elements index has been visited
+                    {
+                        compareDistValue.Add(int.MaxValue);// Add maximum integer value into compareDistValue list
+                    }
+                }
+                
+                src = compareDistValue.IndexOf(compareDistValue.Min());//Assign the index of the smallest item in the list to src
+                
             }
             i++;// increment while counter by 1
-                        
+
         }
         //Display vertex node letters on same line
         foreach (GraphNode graphNode in nodes)
